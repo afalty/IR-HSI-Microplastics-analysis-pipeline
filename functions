@@ -2,7 +2,7 @@
 
 normalization_by_lightsource_<- function(INPUT_spectra,lightsource){
   
-  INPUT_spectra[,-c(1:4)] %>%
+  INPUT_spectra[,-c(1:2)] %>%
     t() %>%
     "/" (lightsource) %>%
     t() %>%
