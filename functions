@@ -12,28 +12,6 @@ normalization_by_lightsource_<- function(INPUT_spectra,lightsource){
   
 }
 
-average_by_fours<-function (data_to_be_averaged) {
-  
-  repeat_list<- (rep(c(1:(nrow(data_to_be_averaged)/4)),each=4))
-  
-  spectral_samples_repeat<- cbind.data.frame(as.character(repeat_list), data_to_be_averaged, stringsAsFactors= FALSE)
-  
-  colnames(spectral_samples_repeat)<- c("list","X","Y", Wavelength)
-  
-  spectral_samples_avg<-spectral_samples_repeat%>%
-    group_by(list) %>%
-    dplyr::summarise(across(everything(), mean))
-  
-  spectral_samples_avg$list <- as.integer(spectral_samples_avg$list)
-  
-  spectral_samples_avg<- arrange(spectral_samples_avg, list)
-  
-  data_only <- spectral_samples_avg[,-1]
-  
-  return(data_only)
-  
-}
-
 
 
 polymer_classifyer<-function(model,pixels, wave,lightsource) {
