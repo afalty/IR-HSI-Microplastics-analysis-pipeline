@@ -1,0 +1,88 @@
+
+
+normalization_by_lightsource_<- function(INPUT_spectra,lightsource){
+  
+  INPUT_spectra[,-c(1:4)] %>%
+    t() %>%
+    "/" (lightsource) %>%
+    t() %>%
+    
+    as.data.frame()
+  
+  
+}
+
+average_by_fours<-function (data_to_be_averaged) {
+  
+  repeat_list<- (rep(c(1:(nrow(data_to_be_averaged)/4)),each=4))
+  
+  spectral_samples_repeat<- cbind.data.frame(as.character(repeat_list), data_to_be_averaged, stringsAsFactors= FALSE)
+  
+  colnames(spectral_samples_repeat)<- c("list","X","Y", Wavelength)
+  
+  spectral_samples_avg<-spectral_samples_repeat%>%
+    group_by(list) %>%
+    dplyr::summarise(across(everything(), mean))
+  
+  spectral_samples_avg$list <- as.integer(spectral_samples_avg$list)
+  
+  spectral_samples_avg<- arrange(spectral_samples_avg, list)
+  
+  data_only <- spectral_samples_avg[,-1]
+  
+  return(data_only)
+  
+}
+
+
+
+polymer_classifyer<-function(model,pixels, wave,lightsource) {
+  
+  pixelsA<-pixels[,-c(1,2)] %>%
+    t() %>%
+    "/" (lightsource) %>%
+    t() %>%
+    as.data.frame()
+  
+  randos<- ids::random_id(n=nrow(pixels),bytes=10, use_openssl = T)
+  
+  pixelsB<-cbind.data.frame(randos,pixelsA)
+  
+  colnames(pixelsB) <- c("ID",wave)
+  
+  spectra_pixels <- SpectraDataFrame(wl= wave[-c(1:8)], nir= as.matrix(pixelsB[-c(1:9)]),id= as.character(pixelsB[,1]), data= pixelsB)
+  
+  k<- kernel("daniell", 7)
+  
+  process_pixel<- apply_spectra(spectra_pixels,kernapply, k)
+  
+  process_pixel<-process_pixel %>% 
+    apply_spectra(diff, 1) %>%
+    apply_spectra(snv) 
+  
+  
+  
+  put_into_model <- as.data.frame(process_pixel@nir[,-c(1:3)])
+  
+  
+  res = predict(model, put_into_model)
+  
+  SIMCA_res<-as.data.frame(res$c.pred)
+  
+  SIMCA_res_xy<- cbind.data.frame(pixels[,c(1,2)], SIMCA_res,stringsAsFactors=T)
+  
+  g<- rasterFromXYZ(SIMCA_res_xy)
+  
+  return(g)
+  
+}
+
+
+convert_envi <- function(hyp_obj){
+  
+  df_specy<- as.wide.df(hyp_obj)
+  df_specy<-df_specy[,-259]
+  df_specy<- as.data.frame(df_specy)
+  return(df_specy)
+  
+}
