@@ -1,8 +1,9 @@
 
 #load libraries (install if necessary)
 
-library(readr)
-library(ggplot2)
+install.packages(c("ggfortify", "tidyr", "plyr", "dplyr", "devtools", "ggsci","mdatools","EEM","spectacles","ids","rgl","tiff","grid","terra","rgdal",
+                   "rgeos","SDMTools","remotes", "signal", "ggpubr", "hyperSpec","rasterVis", "Rcpp", "raster", "tidyverse"))
+
 library(ggfortify)
 library(tidyr)
 library(plyr)
@@ -15,7 +16,6 @@ library(readxl)
 library(spectacles)
 library(ids)
 library(rgl)
-library(png)
 library(tiff)
 library(grid)
 library(terra)
@@ -29,5 +29,4 @@ library(hyperSpec)
 library(rasterVis)
 library(Rcpp)
 library(raster)
-library(viridis)
 library(tidyverse)
