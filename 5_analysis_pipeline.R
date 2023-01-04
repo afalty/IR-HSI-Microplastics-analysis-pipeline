@@ -5,7 +5,7 @@
 
 
 
-setwd("...")
+setwd("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline")
 
 #Create list of file names in folder called "input" 
 temp.dat<- list.files(path= "input", pattern="*.dat")
@@ -31,6 +31,8 @@ myfiles<- mapply(read.ENVI.Nicolet, file= temp.dat, headerfile= temp.hdr, nicole
 
 ##be sure to change temp.dat below to temp.hyspex to preserve labeling from original file names
 
+
+setwd("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/output")
 
 for(i in 1:length(myfiles)) {
   
