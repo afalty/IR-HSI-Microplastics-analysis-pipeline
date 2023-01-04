@@ -5,7 +5,7 @@
 
 
 
-setwd("path_to_wd")
+setwd("...")
 
 #Create list of file names in folder called "input" 
 temp.dat<- list.files(path= "input", pattern="*.dat")
@@ -13,7 +13,7 @@ temp.hdr<-list.files(path= "input", pattern = "*.hdr")
 
 
 #import files 
-setwd("/input")
+setwd("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/input")
 myfiles<- mapply(read.ENVI.Nicolet, file= temp.dat, headerfile= temp.hdr, nicolet.correction=F)
 
 
@@ -30,15 +30,15 @@ myfiles<- mapply(read.ENVI.Nicolet, file= temp.dat, headerfile= temp.hdr, nicole
 
 
 
-setwd("~/output")
+
 
 for(i in 1:length(myfiles)) {
   
   HSI_images<-convert_envi(myfiles[[i]])
   
-  B<-polymer_classifyer(poly_model,HSI_images, wavelength,avg.standard)
+  B<-polymer_classifyer(poly_model,HSI_images, Wavelength,avg.standard)
   
-  Q<- writeRaster(B, sprintf("sample_%s.tiff",temp.hyspex[i]), format = "GTiff", overwrite= T, bylayer=T, suffix="names",datatype="INT1U")
+  Q<- writeRaster(B, sprintf("sample_%s.tiff",temp.dat[i]), format = "GTiff", overwrite= T, bylayer=T, suffix="names",datatype="INT1U")
   
   
 }

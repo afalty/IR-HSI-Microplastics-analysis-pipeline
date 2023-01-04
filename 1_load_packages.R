@@ -1,8 +1,8 @@
 
 #load libraries (install if necessary)
 
-install.packages(c("ggfortify", "tidyr", "plyr", "dplyr", "devtools", "ggsci","mdatools","EEM","spectacles","ids","rgl","tiff","grid","terra","rgdal",
-                   "rgeos","SDMTools","remotes", "signal", "ggpubr", "hyperSpec","rasterVis", "Rcpp", "raster", "tidyverse"))
+#install.packages(c("ggfortify", "tidyr", "plyr", "dplyr", "devtools", "ggsci","mdatools","EEM","spectacles","ids","rgl","tiff","grid","terra","rgdal",
+             #      "rgeos","SDMTools","remotes", "signal", "ggpubr", "hyperSpec","rasterVis", "Rcpp", "raster", "tidyverse"))
 
 library(ggfortify)
 library(tidyr)
@@ -30,3 +30,4 @@ library(rasterVis)
 library(Rcpp)
 library(raster)
 library(tidyverse)
+
