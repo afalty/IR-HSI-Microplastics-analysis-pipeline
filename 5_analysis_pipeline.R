@@ -18,18 +18,18 @@ myfiles<- mapply(read.ENVI.Nicolet, file= temp.dat, headerfile= temp.hdr, nicole
 
 
 
-#If importing hyspex files, use:
+##If importing hyspex files, use:
 
 #temp.hyspex<- list.files(path= "input", pattern="*.hyspex")
 #temp.hdr<-list.files(path= "input", pattern = "*.hdr")
 
-#import files 
+##import files 
 #setwd("/input")
 #myfiles<- mapply(read.ENVI.HySpex, file= temp.dat, headerfile= temp.hyspex)
 
 
 
-
+##be sure to change temp.dat below to temp.hyspex to preserve labeling from original file names
 
 
 for(i in 1:length(myfiles)) {
