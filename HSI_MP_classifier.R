@@ -58,7 +58,7 @@ library(tidyverse)
 
 
 
-source("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/2_functions.R") #source functions from script
+source("~/2_functions.R") #source functions from script
 
 
 load(file= "data/raw_spectra.rda")    #import raw spectral data (with IDs)
@@ -194,12 +194,12 @@ poly_model = simcam(list(SIMCA_PE,
 #Set the working directory to a directory containing two folders: "input" which contains images to be analyzed
 # and "output" where the results of the analysis will be stored
 
-setwd("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline")
+
 
 temp.dat<- list.files(path= "input", pattern="*.dat")       #Create list of file names in folder called "input" 
 temp.hdr<-list.files(path= "input", pattern = "*.hdr")      # list header files separately 
 
-setwd("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/input") #change wd to input folder
+setwd("~/input") #change wd to input folder
 
 myfiles<- mapply(read.ENVI.Nicolet,   #import files 
                  file= temp.dat, 
@@ -224,7 +224,7 @@ myfiles<- mapply(read.ENVI.Nicolet,   #import files
 
 
 
-setwd("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/output") #change wd to output folder
+setwd("~/output") #change wd to output folder
 
 for(i in 1:length(myfiles)) {
   
