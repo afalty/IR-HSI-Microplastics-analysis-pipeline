@@ -1,3 +1,5 @@
+source("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/2_functions.R")
+
 
 Test_SIMCA <- slice_sample(spectral_database, n=(0.2*nrow(spectral_database)))
 colnames(Test_SIMCA)<- colnames(spectral_database)

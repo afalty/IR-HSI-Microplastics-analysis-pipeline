@@ -1,3 +1,6 @@
+source("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/2_functions.R")
+
+
 load(file= "data/raw_spectra.rda")
 load(file= "data/white_standard.rda")
 load(file= "data/wavelength.rda")
