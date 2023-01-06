@@ -1,11 +1,21 @@
-# making a mulitcoloured plot 
+#####################################################
+
+# PLOTTING FALSE COLOUR IMAGES AND SIMCA RESULTS
+
+#Author: Andrea Faltynkova
+ #2023
 
 
-#just plotting as a raster
-plot(B)
+#####################################################
 
 
-#there are four layer in the raster, one for each polymer type. 
+ 
+
+
+plot(B)  #just plotting as a raster
+
+
+#there are four layers in the raster, one for each polymer type. 
 
 #inspecting the object will show which layers correspond to which polymer. Recall that each layer is binary (here -1 or 1). 
 
@@ -14,66 +24,46 @@ B
 #see that layers 1,2,3,4 correspond to PE, PP, PET, PS respectively
 
 #We can use dropLayer for plotting polymers individually: 
-PE<- dropLayer(B,c(2:4))
-plot(PE)
+ 
+plot(dropLayer(B,c(2:4)))
 
-
-
-#hello
 
 
 #If you want to overlay the results onto an image, it's best to use the tiff files that were
-#written to the output folder so that the extents of the various images match. 
+#written to the output folder. 
 
-# we can overlay the result onto a .tif file of the image to visualize the particles and the results
-
-
-setwd("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline")
-
-image<- brick("grid.tif")
-plotRGB(image)
+# we can overlay the result onto a false colour image to visualize the particles and the results
 
 
+setwd("~")
 
-setwd("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/output")
-
-
-#import the files
-
-
-PE<-raster("sample_grid.dat_Comp.PE.tiff")
-PP<-raster("sample_grid.dat_Comp.PP.tiff")
-PET<-raster("sample_grid.dat_Comp.PET.tiff")
-PS<-raster("sample_grid.dat_Comp.PS.tiff")
+image<- brick("sample_image.tif")
+plotRGB(image)  #false colour representation of the hyperspectral image
 
 
-#ensure the extent of the background image matches the extent of the imported rasters:
-#extent(image)
+setwd("~/output")
 
-#0,20, 0, 20 --> set extent of each raster
-extent(PE) <- c(0,20,0,20)
-extent(PET) <- c(0,20,0,20)
-extent(PS) <- c(0,20,0,20)
-extent(PP) <- c(0,20,0,20)
+PE<-raster("sample_sample_image.dat_Comp.PE.tiff")      #import the files
+PP<-raster("sample_sample_image.dat_Comp.PP.tiff")
+PET<-raster("sample_sample_image.dat_Comp.PET.tiff")
+PS<-raster("sample_sample_image.dat_Comp.PS.tiff")
 
+#extent(image)    #ensure the extent of the background image matches the extent of the imported rasters
+#extent(PET)
 
-#choose a colour palette
-
-pal<- colorRampPalette(c( "deeppink", "green", "blue", "orange"))
-
-#plot 
-
-plotRGB(image,1,2,3,axes=T)
-plot(PE,  add=T,col=pal(1), alpha= 0.7)
-plot(PP, add=T, col= pal(2), alpha=0.7)
-plot(PS, add=T, col=pal(3), alpha= 0.7)
-plot(PET, add=T, col=pal(4), alpha= 0.7)
+extent(PE) <- c(0,251,0,270)     #--> set extent of each raster
+extent(PET) <- c(0,251,0,270)
+extent(PS) <- c(0,251,0,270)
+extent(PP) <- c(0,251,0,270)
 
 
 
+pal<- colorRampPalette(c( "deeppink", "green", "blue", "orange"))  #choose a colour palette
 
-#this isn't very exciting just looking at a grid, so you can check the folder "sample plotting" for more demonstrative examples. 
+plotRGB(flip(image,vertical=T),1,2,3,axes=T)  #plot base image (small bug, need to flip the image vertically)
+plot(PE,  add=T,col=pal(1), alpha= 0.7)   #overlay particles identified as PE
+plot(PP, add=T, col= pal(2), alpha=0.7)   #overlay particles identified as PP
+plot(PS, add=T, col=pal(3), alpha= 0.7)   #no PS particles
+plot(PET, add=T, col=pal(4), alpha= 0.7)  #no PET particles
 
-# this small grid was used as an example as larger images contain too much data to be hosted on Github. This is a constructed image
-# made just for demonstration purposes. 
 
