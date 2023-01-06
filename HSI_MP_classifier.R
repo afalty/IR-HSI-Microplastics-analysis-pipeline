@@ -58,7 +58,7 @@ library(tidyverse)
 
 
 
-source("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/functions.R") #source functions from script
+source("~/functions.R") #source functions from script
 
 
 load(file= "data/raw_spectra.rda")    #import raw spectral data (with IDs)
