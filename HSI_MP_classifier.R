@@ -56,9 +56,9 @@ library(tidyverse)
 # SPECTRAL PREPROCESSING 
 #--------------------------------------------------------------------------
 
+setwd("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline")
 
-
-source("~/functions.R") #source functions from script
+source("C:/Users/andrfa/OneDrive - NTNU/Andrea F/IR-HSI-Microplastics-analysis-pipeline/functions.R") #source functions from script
 
 
 load(file= "data/raw_spectra.rda")    #import raw spectral data (with IDs)
@@ -232,7 +232,7 @@ for(i in 1:length(myfiles)) {
   
   B<-polymer_classifyer(poly_model,HSI_images, Wavelength,avg.standard)    #classify spectra in image
   
-  Q<- writeRaster(B, sprintf("sample_%s.tiff",       #preserve labelling from original file list
+  Q<- writeRaster(B, sprintf("sample_%s.tiff",       #preserve labeling from original file list
                   temp.dat[i]), 
                   format = "GTiff",         #write results as a .tiff file
                   overwrite= T, 
@@ -242,5 +242,4 @@ for(i in 1:length(myfiles)) {
   
   
 }
-
 
