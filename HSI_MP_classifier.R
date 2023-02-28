@@ -215,7 +215,7 @@ myfiles<- mapply(read.ENVI.Nicolet,   #import files
 
 ##import files 
 #setwd("/input")
-#myfiles<- mapply(read.ENVI.HySpex, file= temp.dat, headerfile= temp.hyspex)
+#myfiles<- mapply(read.ENVI.HySpex, file= temp.hyspex, headerfile= temp.hdr)
 
 
 
